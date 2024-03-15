@@ -1,14 +1,14 @@
 #include<iostream>
 using namespace std;
 
-class ElemType {
+class ArrayElemType {
     private:
         char *mName;
         int mAge;
     public:
-        ElemType();
-        ElemType(int age);
-        ElemType(char *name,int age);
+        ArrayElemType();
+        ArrayElemType(int age);
+        ArrayElemType(char *name,int age);
         void setName(char *name);
         void setAge(int age);
         char *getName();
@@ -16,33 +16,32 @@ class ElemType {
         void print();
 };
 
-ElemType::ElemType(){
-    mName = (char*)"null";
-    mAge = -1;
+ArrayElemType::ArrayElemType(){
+    
 }
 
-ElemType::ElemType(char *name,int age){
+ArrayElemType::ArrayElemType(char *name,int age){
     mName = name;
     mAge = age;
 }
 
-void ElemType::setName(char *name){
+void ArrayElemType::setName(char *name){
     mName = name;
 }
 
-void ElemType::setAge(int age){
+void ArrayElemType::setAge(int age){
     mAge = age;
 }
 
-char *ElemType::getName(){
+char *ArrayElemType::getName(){
     return mName;
 }
 
-int ElemType::getAge(){
+int ArrayElemType::getAge(){
     return mAge;
 }
 
-void ElemType::print(){
+void ArrayElemType::print(){
     cout<< "姓名:" << mName <<",年龄："<< mAge <<endl;
 }
 
