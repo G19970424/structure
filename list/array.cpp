@@ -1,5 +1,5 @@
 #include "contains.cpp"
-#include "elem.cpp"
+#include "arrayElem.cpp"
 #include <stdio.h>
 #include <stdlib.h>
 #define LIST_INIT_SIZE 100  //线性表存储空间的初始分配量

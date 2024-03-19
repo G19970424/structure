@@ -1,37 +1,37 @@
 #include<iostream>
 using namespace std;
 
-class LinkElemType{
+class LinkElem{
     private:
         int mAge;
         char *mName;
     public:
-        LinkElemType();
-        LinkElemType(int age,char *name);
+        LinkElem();
+        LinkElem(int age,char *name);
         void setAge(int age);
         void setName(char *name);
         int getAge();
         char *getName();
 };
 
-LinkElemType::LinkElemType(){
+LinkElem::LinkElem(){
 
 }
 
-LinkElemType::LinkElemType(int age,char *name){
+LinkElem::LinkElem(int age,char *name){
     mAge = age;
     mName = name;
 }
 
-void LinkElemType::setAge(int age){
+void LinkElem::setAge(int age){
     mAge = age;
 }
-void LinkElemType::setName(char *name){
+void LinkElem::setName(char *name){
     mName = name; 
 }
-int LinkElemType::getAge(){
+int LinkElem::getAge(){
     return mAge;
 }
-char *LinkElemType::getName(){
+char *LinkElem::getName(){
     return mName;
 }
