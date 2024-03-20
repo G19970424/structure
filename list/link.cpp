@@ -10,6 +10,7 @@ typedef struct LNode
 
 /**
  * 在单链线性表L中查询第i个元素并且赋值给e
+ * 时间复杂度：O(n)
 */
 Status GetElem_L(LinkList L,int i,LinkElem &e){
     //L为带头节点的单链表头指针
@@ -29,6 +30,7 @@ Status GetElem_L(LinkList L,int i,LinkElem &e){
 
 /**
  * 在单链线性表L中第i个位置前插入元素e
+ * 时间复杂度：O(n)
 */
 Status ListInsert_L(LinkList &L,int i,LinkElem e){
     //在带头结点的单链线性表L中第i个位置之前插入元素e
@@ -51,37 +53,51 @@ Status ListInsert_L(LinkList &L,int i,LinkElem e){
 }
 
 /**
- * 
+ * 在带头结点的单链线性表L中，删除第i个元素，并由e返回其值
+ * 时间复杂度：O(n)
 */
 Status ListDelete_L(LinkList L,int i,LinkElem e){
-    LNode *p = L->next;
+    //获取L指针
+    LNode *p = L;
+    //计数器 j
     int j = 0;
+    //顺序向后遍历，获取第i个值
     while(p && j<i){
         p = p->next;
         j++;
     }
-
+    //判断L中是否存在第i个元素
     if(!p || j<i)return ERROR;
 
+    //从单链线性表中将第i个元素移除
     LNode *q = p->next;
     p->next = q->next;
+    //通过e获取第i个元素
     e = q->date;
+    //释放指针q
     free(q);
     return OK;
 }
 
 /**
- * 
+ * 头插法创建单链线性表
+ * 时间复杂度：O(b)
 */
 Status CreatList_L(LinkList &L,int n){
+    //逆位序输入n个元素的值，建立带表头结点的单链线性表L
+
+    //初始化L表头空间
     L = (LinkList)malloc(sizeof(LNode));
     L->next = NULL;
 
+    //循环创建结点
     for(int i=n;i>0;--i){
+        //生成新结点
         LinkList p = (LinkList)malloc(sizeof(LNode));
+        //输入元素值
         LinkElem s;
         int age;
-        char *name;
+        char name[12];
         printf("用户年龄为：");
         scanf("%d",&age);
 
@@ -91,12 +107,35 @@ Status CreatList_L(LinkList &L,int n){
         s.setAge(age);
         s.setName(name);
 
+        //插入到表头
         p->date = s;
         p->next = L->next;
         L->next = p;
     }
 
     return OK;
+} 
+
+/**
+ * 合并有序单链线性表La、Lb，将元素有序合并到Lc中
+*/
+void MergeList_L(LinkList &La,LinkList &Lb,LinkList &Lc){
+    LNode *a = La->next,*b = Lb->next;
+    LNode *c;
+    Lc = c = La;
+    while(a && b){
+        if(a->date.getAge() <= b->date.getAge()){
+            c->next = a;
+            c = a;
+            a = a->next;
+        }else{
+            c->next = b;
+            c = b;
+            b = b->next;
+        }
+    }
+    c->next = a?a:b;
+    free(Lb);
 }
 
 void print_L(LinkList &L){
@@ -115,11 +154,25 @@ void print_L(LinkList &L){
     }
 }
 int main(){
-    LinkList L;
+    // LinkList L;
 
-    CreatList_L(L,2);
+    // CreatList_L(L,3);
+    // print_L(L);
+    // LinkElem e = LinkElem(15,"ge");
+    // cout<<"=========="<<endl;
+    // ListInsert_L(L,1,e);
+    // print_L(L);
+    // cout<<"=========="<<endl;
+    // ListDelete_L(L,1,e);
+    // print_L(L);
 
-    print_L(L);
+
+    LinkList La,Lb,Lc;
+    CreatList_L(La,3);
+    CreatList_L(Lb,3);
+    MergeList_L(La,Lb,Lc);
+
+    print_L(Lc);
     return OK;
 }
 
